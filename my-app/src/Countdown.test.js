@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import Countdown from './Countdown';
 
 beforeAll(() => {
@@ -13,6 +13,8 @@ test('countdown number shows correctly as time elapsed', async () => {
   render(<Countdown />);
   await screen.findByText('60 seconds left');
   // Fast-forward time by 10s
-  jest.advanceTimersByTime(10000);
+  act(() => {
+    jest.advanceTimersByTime(10000);
+  });
   await screen.findByText('50 seconds left');
 });
